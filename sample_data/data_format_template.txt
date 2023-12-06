@@ -1,0 +1,1 @@
+<Process ID> <Process Execution Time> <Arrival Time (default = 0)>
