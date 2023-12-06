@@ -147,11 +147,10 @@ class Process:
         :return: A list of processes
         """
         processes = []
-        delimiter = ' '
         with open(path) as f:
             lines = f.readlines()
             for line in lines:
-                line_list = line.split(delimiter)
+                line_list = line.split()
                 pid: str = line_list[0]
                 ex_time: int = int(line_list[1])
                 arrival_time: int = int(line_list[2]) if len(line_list) >= 3 else 0
