@@ -2,7 +2,6 @@ from process import Process
 from scheduler import Scheduler, FIFOScheduler, SJFScheduler, RoundRobinScheduler, SRTFScheduler
 from simulator import Simulator, bar, time_slice_bar
 import json
-import enum
 
 
 class SchedulerType:
