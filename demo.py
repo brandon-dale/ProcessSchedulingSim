@@ -25,7 +25,7 @@ def step_end(process: Process, scheduler: Scheduler) -> None:
     pid = process.id
     start_time = scheduler.time
     time_ran = scheduler.step_time_ran
-    print(f"{pid:4} - At: {start_time:4}, ran for: {time_ran:4}")
+    print(f"RUN  - {pid:4} - At: {start_time:4} - Ran For: {time_ran:4}")
 
 
 def process_done(process: Process, scheduler: Scheduler) -> None:
@@ -95,6 +95,7 @@ def basic_compare_test(input_file: str) -> None:
         FIFOScheduler(processes, verbose),
         SJFScheduler(processes, verbose),
         RoundRobinScheduler(processes, verbose, 5),
+        RoundRobinScheduler(processes, verbose, 6),
         SRTFScheduler(processes, verbose)
     ]
 
@@ -113,14 +114,14 @@ def basic_compare_test(input_file: str) -> None:
     print(json.dumps(stats, sort_keys=False, indent=4))
 
 
-def amdahls_test() -> None:
+def round_robin_test() -> None:
     """
-    Runs a comparison test to demonstrate Amdahl's Law
+    Runs a comparison test to demonstrate the downside of Round Robin
     """
-    print(f"----- RUNNING A TEST TO DEMONSTRATE AMDAHL'S LAW -----")
+    print(f"----- RUNNING A TEST TO DEMONSTRATE ROUND ROBIN DOWNSIDE -----")
 
     # Read processes
-    processes = Process.read_processes('test_data/amdahls-test.txt')
+    processes = Process.read_processes('test_data/roundrobin-test.txt')
 
     # Make schedulers
     verbose = 0
@@ -180,18 +181,17 @@ def time_slice_test(input_file: str) -> None:
 
 def main():
     # Define a preset list of schedulers for convenience
-    # single_scheduler_test('test_data/simple-input.txt', SchedulerType.FIFO, verbose=2)
+    single_scheduler_test('test_data/simple-input.txt', SchedulerType.FIFO, verbose=2)
 
     # basic_compare_test('test_data/simple-input.txt')
-    basic_compare_test('test_data/sjf_test.txt')
+    # basic_compare_test('test_data/sjf_test.txt')
     # basic_compare_test('test_data/srtf_test.txt')
 
-    # amdahls_test()
+    # round_robin_test()
 
-    #time_slice_test('test_data/amdahls-test.txt')
+    # time_slice_test('test_data/simple-input.txt')
 
 
 
 if __name__ == '__main__':
     main()
-
